@@ -26,7 +26,7 @@ IDEA: A nice and easy additive synthesis thingy
 (
 a = {
 	var n = 4;
-	var vol = 0.6;
+	var vol = 0.3;
 	var envs = ~env.value(n, 1);
 	var sigs = ~osc.value(n);
 	var out = sigs.collect{|sig, i| var fin = sig * envs[i]; fin * 1/n};
