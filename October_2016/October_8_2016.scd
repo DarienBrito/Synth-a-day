@@ -5,7 +5,7 @@
 ///////////////////////////////////
 
 /*
-IDEA: A nice and easy additive synthesis thingy
+IDEA: Just a nice and easy additive synthesis thingy
 */
 
 (
