@@ -5,7 +5,7 @@
 ///////////////////////////////////
 
 /*
-IDEA: Make a number of Saw oscillators, each with its own filter
+IDEA: Make a number of oscillators, each with its own filter
 */
 
 (
