@@ -10,7 +10,7 @@ Idea: Expanding on a proof of concept inspired by an article by Inconvergent:
 We are creating a generative additive synth based on co-dependencies of randomness
 
 For this you will need my class: "MyNode.sc"
-
+"https://github.com/DarienBrito/Synth-a-day/blob/master/Resources/MyNode.sc"
 */
 
 // ----------------------------------------------------
