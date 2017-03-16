@@ -29,7 +29,7 @@ SynthDef(\se, { | freq = 60, envDur = 0.5, cFreq = 1000, amp = 0.5, detune = 0.1
 );
 Pbind(
 	\instrument, \se,
-	\degree, Pnsym(Pseq([\odds, \evens],inf), ~seqs).trace,
+	\degree, Pnsym(Pseq([\odds, \evens],inf), ~seqs),
 	\scale, Scale.augmented,
 	\octave, 4,
 	\root, Pseq([3,2,1,0],inf),

@@ -80,3 +80,53 @@ Tdef(\loop,{
 FreqScope.new(1000, 200, 0, server: s);
 )
 
+
+// ----------------------------------------------------------------------
+// Nodes with random velocity in the x and y axis (frequency, amplitude)
+// ----------------------------------------------------------------------
+s.options.memSize = 2 ** 14;
+
+(
+var n = 100;
+var samplingScale = 0.5;
+var applianceScale = 0.25;
+var computeSpecialForce;
+~nodes = n.collect{|i| MyNode((i+1) * 50); };
+~specialForce = Point(0,0);
+
+
+SynthDef(\test, { | freq = 400, amp = 0.5 |
+	var sig = SinOsc.ar(freq);
+	sig = Limiter.ar(sig * amp);
+	Out.ar(0, sig * (1/~nodes.size));
+}).add;
+
+computeSpecialForce = { | object, samplingScale, applianceScale  |
+	(object.size * samplingScale).do{|i|
+		~specialForce = ~specialForce + object[i].getVelocity();
+	};
+
+	(object.size * applianceScale).do{|i|
+		object[i].applyForce(~specialForce);
+	};
+};
+
+Tdef(\loop,{
+	var synths = (~nodes.size).collect{ Synth(\test) };
+	inf.do{
+		~nodes.do{|node, i|
+			node.applyForce( Point(0, rrand(-0.01, 0.01) ));
+			node.updateFunc();
+			node.checkLimits();
+			node.sonify(synths[i]);
+			//node.debug(true);
+		};
+		computeSpecialForce.(~nodes, samplingScale, applianceScale);
+		(1/24).wait; // At visual framerate
+	}
+}).quant_(0).play;
+
+// Listen, and observe it in the spectral monitor
+FreqScope.new(1000, 200, 0, server: s);
+)
+
