@@ -8,6 +8,8 @@
 IDEA: Exploring some different phase modulation algorithms (lots of intersting possibilities here)
 */
 
+
+
 1:       2:        3:        4:          5:          6:
 ---------------------------------------------------------------
 [4]      [4]-[3]   [4]         [4]       [4]         [4]
@@ -20,7 +22,7 @@ IDEA: Exploring some different phase modulation algorithms (lots of intersting p
 
 
 (
-SynthDef(\alg1, {
+SynthDef(\fMalg1, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var sig = SinOsc.ar(op1Freq,
 		phase: SinOsc.ar(op2Freq,
@@ -31,7 +33,7 @@ SynthDef(\alg1, {
 	Out.ar(0, Pan2.ar(sig, pos));
 }).add;
 
-SynthDef(\alg2,{
+SynthDef(\fMalg2,{
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var op4 = SinOsc.ar(op4Freq, 0, op4Index);
 	var op3 = SinOsc.ar(op3Freq, 0, op3Index);
@@ -42,7 +44,7 @@ SynthDef(\alg2,{
 	Out.ar(0, Pan2.ar(sig, pos));
 }).add;
 
-SynthDef(\alg3, {
+SynthDef(\fMalg3, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var op4 = SinOsc.ar(op4Freq, 0, op4Index);
 	var op3 = SinOsc.ar(op3Freq, op4, op3Index);
@@ -53,7 +55,7 @@ SynthDef(\alg3, {
 	Out.ar(0, Pan2.ar(sig, pos));
 }).add;
 
-SynthDef(\alg4, {
+SynthDef(\fMalg4, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var op4 = SinOsc.ar(op4Freq, 0, op4Index);
 	var op3 = SinOsc.ar(op3Freq, op4, op3Index);
@@ -64,7 +66,7 @@ SynthDef(\alg4, {
 	Out.ar(0, Pan2.ar(sig, pos));
 }).add;
 
-SynthDef(\alg5, {
+SynthDef(\fMalg5, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var op4 = SinOsc.ar(op4Freq, 0, op4Index);
 	var op3 = SinOsc.ar(op3Freq, op4, op3Index);
@@ -76,7 +78,7 @@ SynthDef(\alg5, {
 	Out.ar(0, Pan2.ar(sig, pos));
 }).add;
 
-SynthDef(\alg6, {
+SynthDef(\fMalg6, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var op4 = SinOsc.ar(op4Freq, 0, op4Index);
 	var op3 = SinOsc.ar(op3Freq, op4, op3Index);
@@ -89,7 +91,7 @@ SynthDef(\alg6, {
 }).add;
 
 // Tester function
-~phaseModSynth = { |type = \alg1, b = 200, m1 = 100, m2 = 50, m3 = 25, amp = 1, i1 = 2, i2 = 3, i3 = 4, pos = 0, rel = 1|
+~phaseModSynth = { |type = \fMalg1, b = 200, m1 = 100, m2 = 50, m3 = 25, amp = 1, i1 = 2, i2 = 3, i3 = 4, pos = 0, rel = 1|
 	Synth(type, [\op1Freq, b,
 		\op2Freq, m1, \op3Freq, m2, \op4Freq, m3,
 		\op1Index, amp, \op2Index, i1, \op3Index, i2, \op4Index, i3,
@@ -100,7 +102,7 @@ SynthDef(\alg6, {
 
 // A little test to hear the algorithms's different colours:
 (
-var algorithms = 6.collect{|i| (\alg ++ (i+1)).asSymbol};
+var algorithms = 6.collect{|i| (\fMalg ++ (i+1)).asSymbol};
 Tdef(\test, {
 	algorithms.do{|tag, i|
 		var type = tag;
@@ -123,8 +125,8 @@ Tdef(\test, {
 
 (
 Pbind(
-	//\instrument, Pseq([\alg1, \alg2, \alg3, \alg4, \alg5, \alg6],inf),
-	\instrument, \alg1,
+	//\instrument, Pseq([\fMalg1, \fMalg2, \fMalg3, \fMalg4, \fMalg5, \fMalg6],inf),
+	\instrument, \fMalg1,
 	\op1Freq, Pseq([100, 400, 300] * 5,inf),
 	\op2Freq, Pkey(\op1Freq) * 0.5,
 	\op3Freq, Pkey(\op2Freq) * 0.5,

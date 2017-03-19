@@ -7,7 +7,6 @@
 /*
 IDEA: Make a textural synth? I have no clue of what to do today... let's see what happens...
 */
-
 (
 Ndef(\groma).play;
 Ndef(\groma).fadeTime = 5;

@@ -8,7 +8,7 @@
 IDEA: Expanding FM with decay envelopes
 */
 (
-SynthDef(\alg1, {
+SynthDef(\darkFM, {
 	| op1Freq = 100, op2Freq = 200, op3Freq = 1, op4Freq = 20, op1Index = 1, op2Index = 4, op3Index = 10, op4Index = 2, pan = 0, amp = 1, rel = 1, pos = 0, out = 0 |
 	var trig = Impulse.kr(0.1);
 	var sig = SinOsc.ar(op1Freq,
@@ -21,11 +21,13 @@ SynthDef(\alg1, {
 	sig = sig * EnvGen.kr(Env.perc(0.01, rel), doneAction: 2);
 	sig = sig * amp;
 	Out.ar(0, Pan2.ar(sig, pos));
-}).add;)
+}).add;
+
+)
 
 (
 Pbindef(\fm,
-	\instrument, \alg1,
+	\instrument, \darkFM,
 	\op1Freq, Pseq([60, 68, 62],inf).midicps,
 	\op2Freq, 30,
 	\op2Index, Pseq([100, 40, 20], inf),

@@ -10,7 +10,7 @@ IDEA: A slightly waveshaped synth with Pulses and a filter
 
 
 (
-SynthDef(\obj, { | freq = 60, envDur = 1, detune = 1.01, amp = 1 |
+SynthDef(\glidy, { | freq = 60, envDur = 1, detune = 1.01, amp = 1 |
 	var lFreq = Lag.kr(freq, 0.1);
 	var pulses = Pulse.ar([ lFreq, lFreq * detune ]);
 	var sig = RLPF.ar(pulses, Linen.kr(1, envDur * 0.3, envDur * 0.1, envDur * 0.6).range(100, 12000), 0.1);
@@ -25,7 +25,7 @@ SynthDef(\obj, { | freq = 60, envDur = 1, detune = 1.01, amp = 1 |
 }).add
 )
 
-Synth(\obj, [\freq, 30, \envDur, 1, \amp, 0.5]);
+Synth(\glidy, [\freq, 30, \envDur, 1, \amp, 0.5]);
 
 
 // Glided version
@@ -38,7 +38,7 @@ Synth(\obj, [\freq, 30, \envDur, 1, \amp, 0.5]);
 );
 
 Pmono(
-	\obj,
+	\glidy,
 	\scale, Pseq([Scale.augmented, Scale.diminished],inf),
 	\degree, Pnsym(Pseq([\upwards, \downwards, \stepwise, \dstepwise], inf), ~seqs),
 	\octave, Pseq([3,2,4],inf),
@@ -59,7 +59,7 @@ Pmono(
 );
 
 Pbind(
-	\instrument, \obj,
+	\instrument, \glidy,
 	\scale, Pseq([Scale.augmented, Scale.diminished],inf),
 	\degree, Pnsym(Pseq([\upwards, \downwards, \stepwise, \dstepwise], inf), ~seqs),
 	\octave, Pseq([3,2,4],inf),

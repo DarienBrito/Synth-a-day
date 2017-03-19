@@ -65,4 +65,3 @@ Pbind(
 	\dur, Pif(Pfunc({ 0.5.coin}), 0.25, 0.5),
 ).play
 )
-

@@ -30,8 +30,8 @@ Ndef(\alx, { | fbScale = 0.9, fbRate = 0.01, masterCfreq = 18000 |
 	sig = sig.sin(-0.9, 0.9);
 	sig = LPF.ar(sig, masterCfreq);
 	sig = Limiter.ar(sig);
-
-}))
+})
+)
 
 
 
